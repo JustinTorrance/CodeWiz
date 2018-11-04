@@ -35,7 +35,6 @@ class App extends Component {
   //setState updates this.state
   // this.state.contextQuestions
 
-
   renderQuestions(e) {
     if (e.target.name === 'scope') {
       this.setState({
@@ -55,11 +54,13 @@ class App extends Component {
 
   render() {
     if (this.state.scopeSelected) { 
-      return ( <CardContainer questions={this.state.scopeQuestions} /> )
+      return ( <CardContainer questions={this.state.scopeQuestions} />
+
+  )
     } else if (this.state.contextSelected) { 
       return ( <CardContainer questions={this.state.contextQuestions} /> )
     } else if (this.state.prototypeSelected) { 
-      return ( <CardContainer questions={this.state.prototypeQuestions} /> )
+      return ( <CardContainer questions={this.state.prototypeMethodQuestions} /> )
     } else {   
       return (
         <div className="App">
@@ -77,3 +78,7 @@ class App extends Component {
 }
 
 export default App;
+
+        // <section className='filter-btn-section'>
+        //   <button className='view-correct-btn'>View Correct Cards</button>
+        // </section>
