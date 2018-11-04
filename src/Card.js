@@ -10,30 +10,50 @@ class Card extends Component {
     }
     this.submitAnswer = this.submitAnswer.bind(this);
     this.changeRadio = this.changeRadio.bind(this);
-    // this.setToStorage = this.setToStorage.bind(this);
+    this.setCorrectToStorage = this.setCorrectToStorage.bind(this);
+    this.setIncorrectToStorage = this.setIncorrectToStorage.bind(this);
   }
 
 
   submitAnswer(e) {
     e.preventDefault();
     if (this.state.checked === 'true') {
-      console.log('card:', this.question)
       this.setState({
         answeredCorrectly: true
       }) 
-      // localStorage.setItem("storedCardArray", JSON.stringify(newArray));
+      this.setCorrectToStorage(this.props.card)
 
     } else {
-      console.log('incorrect')
       this.setState({
         answeredCorrectly: false
       })
+      this.setIncorrectToStorage(this.props.card)
     }
-    // this.setToStorage()
   }
 
-  // setToStorage() {
-  // }
+  setCorrectToStorage(card) {
+    var correctCards = [];
+    if (JSON.parse(localStorage.getItem("correctCardsStorage"))) {
+      correctCards = JSON.parse(localStorage.getItem("correctCardsStorage")); 
+      correctCards.push(card);
+      localStorage.setItem('correctCardsStorage', JSON.stringify(correctCards));
+    } else {
+      correctCards.push(card);
+      localStorage.setItem('correctCardsStorage', JSON.stringify(correctCards));
+    }
+  }
+
+  setIncorrectToStorage(card) {
+    var incorrectCards = [];
+    if (JSON.parse(localStorage.getItem("incorrectCardsStorage"))) {
+      incorrectCards = JSON.parse(localStorage.getItem("incorrectCardsStorage")); 
+      incorrectCards.push(card);
+      localStorage.setItem('incorrectCardsStorage', JSON.stringify(incorrectCards));
+    } else {
+      incorrectCards.push(card);
+      localStorage.setItem('incorrectCardsStorage', JSON.stringify(incorrectCards));
+    }
+  }
 
   changeRadio(e) {
     this.setState({
