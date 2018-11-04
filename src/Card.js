@@ -94,10 +94,6 @@ class Card extends Component {
   }
 
 
-
-
-
-
 }
 
 

@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CardContainer from './CardContainer.js';
+import Filters from './Filters.js'
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      filteredQuestions: [],
       scopeQuestions: [],
       contextQuestions: [],
       prototypeMethodQuestions: [],
       scopeSelected: false,
       contextSelected: false,
-      prototypeSelected: false
+      prototypeSelected: false,
+      filterSelected: false
+
     }
     this.renderQuestions = this.renderQuestions.bind(this);
+    this.fetchStorage = this.fetchStorage.bind(this);
   }
 
   componentDidMount() {
@@ -51,10 +56,27 @@ class App extends Component {
     }
   }
 
+  fetchStorage(query) {
+    const parsedQuery = JSON.parse(localStorage.getItem(query))
+    console.log(parsedQuery);
+    this.setState({
+      filteredQuestions: parsedQuery,
+      filterSelected: true,
+      scopeSelected: false,
+      contextSelected: false,
+      prototypeSelected: false
+    })
+  }
 
   render() {
-    if (this.state.scopeSelected) { 
-      return ( <CardContainer questions={this.state.scopeQuestions} />
+    if (this.state.filterSelected) {
+      return ( <CardContainer questions={this.state.filteredQuestions} />
+      )
+    } else if (this.state.scopeSelected) { 
+      return (  <div className='card-page'>
+                  <CardContainer questions={this.state.scopeQuestions} />
+                  <Filters fetchStorage={this.fetchStorage}/>
+                </div>
 
   )
     } else if (this.state.contextSelected) { 
@@ -79,6 +101,7 @@ class App extends Component {
 
 export default App;
 
-        // <section className='filter-btn-section'>
-        //   <button className='view-correct-btn'>View Correct Cards</button>
-        // </section>
+//If contextSelected, and clicks view all correct cards: 
+// show filter cards IF they are in the contextSelected array AND in correctCardsStorage
+
+
