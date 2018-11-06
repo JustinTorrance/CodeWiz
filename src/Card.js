@@ -6,18 +6,18 @@ class Card extends Component {
     super();
     this.state = {
       answeredCorrectly: null,
-      checked: ''
+      correct: ''
     }
     this.submitAnswer = this.submitAnswer.bind(this);
     this.changeRadio = this.changeRadio.bind(this);
     this.setCorrectToStorage = this.setCorrectToStorage.bind(this);
-    this.setIncorrectToStorage = this.setIncorrectToStorage.bind(this);
+    // this.setIncorrectToStorage = this.setIncorrectToStorage.bind(this);
   }
 
 
   submitAnswer(e) {
     e.preventDefault();
-    if (this.state.checked === 'true') {
+    if (this.state.correct === 'true') {
       this.setState({
         answeredCorrectly: true
       }) 
@@ -25,9 +25,9 @@ class Card extends Component {
 
     } else {
       this.setState({
-        answeredCorrectly: false
+        answeredCorrectly: false  
       })
-      this.setIncorrectToStorage(this.props.card)
+      // this.setIncorrectToStorage(this.props.card)
     }
   }
 
@@ -43,21 +43,21 @@ class Card extends Component {
     }
   }
 
-  setIncorrectToStorage(card) {
-    var incorrectCards = [];
-    if (JSON.parse(localStorage.getItem("incorrectCardsStorage"))) {
-      incorrectCards = JSON.parse(localStorage.getItem("incorrectCardsStorage")); 
-      incorrectCards.push(card);
-      localStorage.setItem('incorrectCardsStorage', JSON.stringify(incorrectCards));
-    } else {
-      incorrectCards.push(card);
-      localStorage.setItem('incorrectCardsStorage', JSON.stringify(incorrectCards));
-    }
-  }
+  // setIncorrectToStorage(card) {
+  //   var incorrectCards = [];
+  //   if (JSON.parse(localStorage.getItem("incorrectCardsStorage"))) {
+  //     incorrectCards = JSON.parse(localStorage.getItem("incorrectCardsStorage")); 
+  //     incorrectCards.push(card);
+  //     localStorage.setItem('incorrectCardsStorage', JSON.stringify(incorrectCards));
+  //   } else {
+  //     incorrectCards.push(card);
+  //     localStorage.setItem('incorrectCardsStorage', JSON.stringify(incorrectCards));
+  //   }
+  // }
 
   changeRadio(e) {
     this.setState({
-      checked: e.target.className
+      correct: e.target.className
     })
   }
 
@@ -90,12 +90,13 @@ class Card extends Component {
           </form>
         </section>
       </div> 
-    )
+      )
   }
 
 
 }
 
+      // this.setCorrectToStorage({...this.props.card, category: props.currcategory})
 
 
 export default Card;

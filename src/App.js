@@ -28,10 +28,20 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         const { contextQuestions, scopeQuestions, prototypeMethodQuestions } = data.codeWizCategories
+        const contextQuestionsPlus = contextQuestions.map((question) => {
+          return Object.assign({}, question, {category: "context"})
+        });
+        const scopeQuestionsPlus = scopeQuestions.map((question) => {
+          return Object.assign({}, question, {category: "scope"})
+        });
+        const prototypeMethodQuestionsPlus = prototypeMethodQuestions.map((question) => {
+          return Object.assign({}, question, {category: "prototype"})
+        });
+
          this.setState({
-          contextQuestions: contextQuestions,
-          scopeQuestions: scopeQuestions,
-          prototypeMethodQuestions: prototypeMethodQuestions
+          contextQuestions: contextQuestionsPlus,
+          scopeQuestions: scopeQuestionsPlus,
+          prototypeMethodQuestions: prototypeMethodQuestionsPlus
          })
       })
       .catch(error => console.log(error))
@@ -57,32 +67,47 @@ class App extends Component {
   }
 
   fetchStorage(query) {
-    const parsedQuery = JSON.parse(localStorage.getItem(query))
-    console.log(parsedQuery);
+    const parsedQuery = JSON.parse(localStorage.getItem(query));
     this.setState({
       filteredQuestions: parsedQuery,
-      filterSelected: true,
-      scopeSelected: false,
-      contextSelected: false,
-      prototypeSelected: false
+      filterSelected: true
+      // scopeSelected: false,
+      // contextSelected: false,
+      // prototypeSelected: false
     })
   }
 
   render() {
-    if (this.state.filterSelected) {
-      return ( <CardContainer questions={this.state.filteredQuestions} />
+    if (this.state.filterSelected && this.state.scopeSelected) {
+      return ( <CardContainer questions={this.state.filteredQuestions.filter((question) => {
+        return question.category === 'scope';
+      })} />
+      )
+    } else if (this.state.filterSelected && this.state.contextSelected) {
+      return ( <CardContainer questions={this.state.filteredQuestions.filter((question) => {
+        return question.category === 'context';
+      })} />
+      )
+    } else if (this.state.filterSelected && this.state.prototypeSelected) {
+      return ( <CardContainer questions={this.state.filteredQuestions.filter((question) => {
+        return question.category === 'prototype';
+      })} />
       )
     } else if (this.state.scopeSelected) { 
       return (  <div className='card-page'>
                   <CardContainer questions={this.state.scopeQuestions} />
                   <Filters fetchStorage={this.fetchStorage}/>
-                </div>
-
-  )
+                </div>)
     } else if (this.state.contextSelected) { 
-      return ( <CardContainer questions={this.state.contextQuestions} /> )
+      return ( <div className='card-page'>
+                  <CardContainer questions={this.state.contextQuestions} />
+                  <Filters fetchStorage={this.fetchStorage}/>
+                </div>) 
     } else if (this.state.prototypeSelected) { 
-      return ( <CardContainer questions={this.state.prototypeMethodQuestions} /> )
+      return ( <div className='card-page'>
+                  <CardContainer questions={this.state.prototypeMethodQuestions} />
+                  <Filters fetchStorage={this.fetchStorage}/>
+                </div>)  
     } else {   
       return (
         <div className="App">
