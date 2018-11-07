@@ -21,12 +21,13 @@ class Card extends Component {
       this.setState({
         answeredCorrectly: true
       }) 
+      e.target.closest('.card-wrapper').classList.toggle('correct')
       this.setCorrectToStorage(this.props.card)
-
-    } else {
+    } else if (this.state.correct === 'false') {
       this.setState({
         answeredCorrectly: false  
       })
+      e.target.closest('.card-wrapper').classList.toggle('incorrect')
       // this.setIncorrectToStorage(this.props.card)
     }
   }
@@ -65,7 +66,7 @@ class Card extends Component {
     return(
       <div className='card-wrapper'>
         <section className='question-section'>
-          <h1>{ this.props.card.question }</h1>
+          <h3>{ this.props.card.question }</h3>
         </section>
 
         <section className='answer-section'>

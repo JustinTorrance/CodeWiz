@@ -1,0 +1,9 @@
+@import 'variables';
+
+.card-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: $coolRed;
+  position: relative;
+}
