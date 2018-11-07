@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import CardContainer from './CardContainer.js';
 import Filters from './Filters.js'
+import './App.css';
+import './styles/main.scss';
 
 class App extends Component {
   constructor() {
@@ -16,7 +16,6 @@ class App extends Component {
       contextSelected: false,
       prototypeSelected: false,
       filterSelected: false
-
     }
     this.renderQuestions = this.renderQuestions.bind(this);
     this.fetchStorage = this.fetchStorage.bind(this);
@@ -46,9 +45,6 @@ class App extends Component {
       })
       .catch(error => console.log(error))
   }
-  //setting state for 3 different keys in this.state
-  //setState updates this.state
-  // this.state.contextQuestions
 
   renderQuestions(e) {
     if (e.target.name === 'scope') {
@@ -71,41 +67,36 @@ class App extends Component {
     this.setState({
       filteredQuestions: parsedQuery,
       filterSelected: true
-      // scopeSelected: false,
-      // contextSelected: false,
-      // prototypeSelected: false
     })
   }
 
   render() {
-    if (this.state.filterSelected && this.state.scopeSelected) {
-      return ( <CardContainer questions={this.state.filteredQuestions.filter((question) => {
-        return question.category === 'scope';
-      })} />
-      )
-    } else if (this.state.filterSelected && this.state.contextSelected) {
-      return ( <CardContainer questions={this.state.filteredQuestions.filter((question) => {
-        return question.category === 'context';
-      })} />
-      )
-    } else if (this.state.filterSelected && this.state.prototypeSelected) {
-      return ( <CardContainer questions={this.state.filteredQuestions.filter((question) => {
-        return question.category === 'prototype';
-      })} />
-      )
-    } else if (this.state.scopeSelected) { 
+    const { filterSelected, filteredQuestions, scopeSelected, contextSelected, prototypeSelected, contextQuestions, scopeQuestions, prototypeMethodQuestions } = this.state;
+    if (filterSelected && scopeSelected) {
+      return ( <CardContainer questions={filteredQuestions.filter((question) => {
+        return question.category === 'scope' })} />)
+    } else if (filterSelected && contextSelected) {
+      return ( <CardContainer questions={filteredQuestions.filter((question) => {
+        return question.category === 'context' })} /> )
+    } else if (filterSelected && prototypeSelected) {
+      return ( <CardContainer questions={filteredQuestions.filter((question) => {
+        return question.category === 'prototype' })} /> )
+    } else if (scopeSelected) { 
       return (  <div className='card-page'>
-                  <CardContainer questions={this.state.scopeQuestions} />
+                  <CardContainer  filterSelected={filterSelected}
+                                  questions={scopeQuestions} />
                   <Filters fetchStorage={this.fetchStorage}/>
                 </div>)
-    } else if (this.state.contextSelected) { 
+    } else if (contextSelected) { 
       return ( <div className='card-page'>
-                  <CardContainer questions={this.state.contextQuestions} />
+                  <CardContainer  filterSelected={filterSelected}
+                                  questions={contextQuestions} />
                   <Filters fetchStorage={this.fetchStorage}/>
                 </div>) 
-    } else if (this.state.prototypeSelected) { 
+    } else if (prototypeSelected) { 
       return ( <div className='card-page'>
-                  <CardContainer questions={this.state.prototypeMethodQuestions} />
+                  <CardContainer  filterSelected={filterSelected}
+                                  questions={prototypeMethodQuestions} />
                   <Filters fetchStorage={this.fetchStorage}/>
                 </div>)  
     } else {   
@@ -113,10 +104,9 @@ class App extends Component {
         <div className="App">
           <div className='landing-wrapper'>
             <h1>What Do You Want To Study?</h1>
-            <button name='scope' onClick={this.renderQuestions} className='scope-btn'>Scope</button>
-            <button name='context' onClick={this.renderQuestions} className='context-btn'>Context</button>
-            <button name='prototype' onClick={this.renderQuestions} className='prototype-btn'>Prototype Methods</button>
-  {/*store above is props. I'm creating a prop and passing it. A prop is basically a variable/attribute*/ } 
+            <button name='scope' onClick={this.renderQuestions} className='scope-btn btn'>Scope</button>
+            <button name='context' onClick={this.renderQuestions} className='context-btn btn'>Context</button>
+            <button name='prototype' onClick={this.renderQuestions} className='prototype-btn btn'>Prototype Methods</button>
           </div>
         </div>
     );
@@ -125,8 +115,3 @@ class App extends Component {
 }
 
 export default App;
-
-//If contextSelected, and clicks view all correct cards: 
-// show filter cards IF they are in the contextSelected array AND in correctCardsStorage
-
-
