@@ -73,14 +73,8 @@ class App extends Component {
   }
 
   clearStorage() {
-    console.log('helloooo')
     localStorage.clear()
     this.setState({
-      scopeSelected: this.state.scopeSelected,
-      contextSelected: this.state.contextSelected,
-      prototypeSelected: this.state.prototypeSelected,
-      filterSelected: this.state.filterSelected
-    })
   }
 
   takeHome() {
