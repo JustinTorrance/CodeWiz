@@ -1,32 +1,61 @@
 @import 'variables';
 
-
 .card-wrapper {
   display: flex;
+  flex-direction: column;
   background-color: white;
   color: $coolRed;
   height: 100%;
   margin: 5px;
   section {
-    width: 200px;
-    height: 200px;
+    width: 500px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: -40px;
-    margin: 40px;
-    // text-align: center;
+    margin: 10px 40px 40px 40px;
     li {
       list-style-type: none;
+      font-size: 1.5rem;
     }
   }
-
 }
 
 .incorrect {
-  border: $bananaYellow solid 5px;
+  border: $bananaYellow solid 10px;
 }
 
 .correct {
-  border: green solid 5px;
+  border: green solid 10px;
+}
+
+.correctResult {
+  font-size: 1.1rem;
+  color: green;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.incorrectResult {
+  font-size: 1.1rem;
+  color: $coolRed;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.submit-btn {
+  width: 250px;
+  height: 60px;
+  background-color: $coolRed;
+  color: white;
+  border-radius: 50px;
+  border: white solid 2px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 20px 0;
+  &:hover { cursor: pointer;
+            background-color: white;
+            color: $coolRed;
+            border: $coolRed 2px solid;
+           }
 }

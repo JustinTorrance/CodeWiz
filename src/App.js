@@ -19,6 +19,8 @@ class App extends Component {
     }
     this.renderQuestions = this.renderQuestions.bind(this);
     this.fetchStorage = this.fetchStorage.bind(this);
+    this.takeHome = this.takeHome.bind(this);
+    this.clearStorage = this.clearStorage.bind(this);
   }
 
   componentDidMount() {
@@ -70,35 +72,76 @@ class App extends Component {
     })
   }
 
+  clearStorage() {
+    console.log('helloooo')
+    localStorage.clear()
+    this.setState({
+      scopeSelected: this.state.scopeSelected,
+      contextSelected: this.state.contextSelected,
+      prototypeSelected: this.state.prototypeSelected,
+      filterSelected: this.state.filterSelected
+    })
+  }
+
+  takeHome() {
+    this.setState({
+      scopeSelected: false,
+      contextSelected: false,
+      prototypeSelected: false,
+      filterSelected: false
+    })
+  }
+
   render() {
     const { filterSelected, filteredQuestions, scopeSelected, contextSelected, prototypeSelected, contextQuestions, scopeQuestions, prototypeMethodQuestions } = this.state;
     if (filterSelected && scopeSelected) {
-      return ( <CardContainer questions={filteredQuestions.filter((question) => {
-        return question.category === 'scope' })} />)
+      return (  <div className='card-page'>
+                  <CardContainer questions={filteredQuestions.filter((question) => {
+                    return question.category === 'scope' })} />
+                  <Filters  fetchStorage={this.fetchStorage}
+                            takeHome={this.takeHome}
+                            clearStorage={this.clearStorage}/>
+                </div> )
     } else if (filterSelected && contextSelected) {
-      return ( <CardContainer questions={filteredQuestions.filter((question) => {
-        return question.category === 'context' })} /> )
+      return (  <div className='card-page'>
+                  <CardContainer questions={filteredQuestions.filter((question) => {
+                  return question.category === 'context' })} /> 
+                  <Filters  fetchStorage={this.fetchStorage}
+                            takeHome={this.takeHome}
+                            clearStorage={this.clearStorage}/>
+                </div> )
     } else if (filterSelected && prototypeSelected) {
-      return ( <CardContainer questions={filteredQuestions.filter((question) => {
-        return question.category === 'prototype' })} /> )
+      return (  <div className='card-page'>
+                  <CardContainer questions={filteredQuestions.filter((question) => {
+                  return question.category === 'prototype' })} /> 
+                  <Filters  fetchStorage={this.fetchStorage}
+                            takeHome={this.takeHome}
+                            clearStorage={this.clearStorage}/>
+                </div> )
     } else if (scopeSelected) { 
       return (  <div className='card-page'>
                   <CardContainer  filterSelected={filterSelected}
                                   questions={scopeQuestions} />
-                  <Filters fetchStorage={this.fetchStorage}/>
-                </div>)
+                  <Filters  fetchStorage={this.fetchStorage}
+                            takeHome={this.takeHome}
+                            clearStorage={this.clearStorage}/>
+                </div> )
     } else if (contextSelected) { 
       return ( <div className='card-page'>
                   <CardContainer  filterSelected={filterSelected}
                                   questions={contextQuestions} />
-                  <Filters fetchStorage={this.fetchStorage}/>
-                </div>) 
+                  <Filters  fetchStorage={this.fetchStorage}
+                            takeHome={this.takeHome}
+                            clearStorage={this.clearStorage}/>
+                </div> ) 
     } else if (prototypeSelected) { 
       return ( <div className='card-page'>
                   <CardContainer  filterSelected={filterSelected}
                                   questions={prototypeMethodQuestions} />
-                  <Filters fetchStorage={this.fetchStorage}/>
-                </div>)  
+                  <Filters  fetchStorage={this.fetchStorage}
+                            takeHome={this.takeHome}
+                            clearStorage={this.clearStorage}/>
+                </div> )  
     } else {   
       return (
         <div className="App">
