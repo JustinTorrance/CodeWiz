@@ -74,7 +74,6 @@ class App extends Component {
 
   clearStorage() {
     localStorage.clear()
-    this.setState({
   }
 
   takeHome() {
