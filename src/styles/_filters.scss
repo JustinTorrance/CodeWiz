@@ -1,0 +1,28 @@
+@import 'variables';
+
+.filter-btn-section {
+  position: fixed;
+  top: 5%;
+  right: 15%;
+  // margin: 20px 50px 0 0;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    width: 200px;
+    height: 60px;
+    background-color: white;
+    color: $coolRed;
+    border-radius: 50px;
+    border: white solid 2px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    &:hover { cursor: pointer;
+              background-color: $coolRed;
+              color: white ;
+           }
+}
+
+
+}

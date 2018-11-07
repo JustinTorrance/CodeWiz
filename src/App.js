@@ -103,10 +103,17 @@ class App extends Component {
       return (
         <div className="App">
           <div className='landing-wrapper'>
-            <h1>What Do You Want To Study?</h1>
-            <button name='scope' onClick={this.renderQuestions} className='scope-btn btn'>Scope</button>
-            <button name='context' onClick={this.renderQuestions} className='context-btn btn'>Context</button>
-            <button name='prototype' onClick={this.renderQuestions} className='prototype-btn btn'>Prototype Methods</button>
+            <div className='codewiz-title-div'>
+              <h1 className='codewiz-title'><span>C</span>ode<span>W</span>iz</h1>
+            </div>
+            <div className='greeting-div'> 
+              <h1 className='greeting'><span>W</span>hat do you <span>w</span>ant to study?</h1>
+            </div>
+            <div className='app-btn-wrapper'>
+              <button name='scope' onClick={this.renderQuestions} className='scope-btn btn'>S<span>c</span>ope</button>
+              <button name='context' onClick={this.renderQuestions} className='context-btn btn'><span>C</span>ontext</button>
+              <button name='prototype' onClick={this.renderQuestions} className='prototype-btn btn'>Prototype Methods</button>
+            </div>
           </div>
         </div>
     );

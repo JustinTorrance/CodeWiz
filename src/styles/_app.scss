@@ -1,0 +1,47 @@
+@import "variables";
+
+* {
+  margin: 0;
+}
+
+.landing-wrapper {
+  font-family: 'Share Tech Mono', monospace;;
+  background-color: $coolRed;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  span {
+    color: $bananaYellow;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  button {
+    width: 270px;
+    height: 60px;
+    background-color: $coolRed;
+    color: white;
+    border-radius: 50px;
+    border: white solid 2px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 10px;
+    &:hover { cursor: pointer;
+              background-color: white;
+              color: $coolRed;
+             }
+  }
+}
+
+.codewiz-title-div {
+  font-size: 3rem;
+  margin: 10% 0 5% 0;
+}
+
+.greeting-div {
+  margin-bottom: 5%;
+}
