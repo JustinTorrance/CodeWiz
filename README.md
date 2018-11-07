@@ -1,6 +1,3 @@
-Abstract at the top (A sentence or two describing the project)
-Install/Setup instructions
-Everything else (must include wireframes and screenshot/GIF of finished project)
 # CodeWiz
 
 CodeWiz is a study app for developers. Users learn the concepts of programming using flashcards and quizes.
